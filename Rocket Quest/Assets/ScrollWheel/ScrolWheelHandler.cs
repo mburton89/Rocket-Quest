@@ -12,7 +12,7 @@ public class ScrolWheelHandler : MonoBehaviour, IPointerDownHandler, IPointerUpH
     float initialWheelZRot;
     bool canScroll;
     [SerializeField] Transform wheel;
-    [SerializeField] Transform bear;
+    [SerializeField] Transform target;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -32,7 +32,7 @@ public class ScrolWheelHandler : MonoBehaviour, IPointerDownHandler, IPointerUpH
         {
             currentTouchYPos = Input.mousePosition.y;
             wheel.eulerAngles = new Vector3(0, 0, initialWheelZRot + (currentTouchYPos - initialTouchYPos));
-            bear.eulerAngles = wheel.eulerAngles;
+            target.eulerAngles = wheel.eulerAngles;
         }
     }
 }
