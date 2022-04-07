@@ -16,6 +16,10 @@ public class Rocket : MonoBehaviour
 
     [HideInInspector] ParticleSystem thrustParticles;
 
+    [SerializeField] AudioSource thrustSound;
+
+    [HideInInspector] public bool shouldThrust;
+
     void Awake()
     {
         _rigidBody2D = GetComponent<Rigidbody2D>();
@@ -24,9 +28,13 @@ public class Rocket : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(_thrust))
+        if (Input.GetKey(_thrust) || shouldThrust)
         {
             Thrust();
+        }
+        if (Input.GetKeyUp(_thrust))
+        {
+            thrustSound.volume = 0;
         }
 
         if (Input.GetKey(_turnLeft))
@@ -47,10 +55,11 @@ public class Rocket : MonoBehaviour
         }
     }
 
-    void Thrust()
+    public void Thrust()
     {
         _rigidBody2D.AddRelativeForce(Vector3.up * acceleration * Time.deltaTime);
         thrustParticles.Emit(1);
+        thrustSound.volume = 1;
     }
 
     void TurnLeft()
