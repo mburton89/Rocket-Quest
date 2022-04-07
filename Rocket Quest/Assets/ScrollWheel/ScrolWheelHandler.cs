@@ -31,7 +31,7 @@ public class ScrolWheelHandler : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if (canScroll)
         {
             currentTouchYPos = Input.mousePosition.y;
-            wheel.eulerAngles = new Vector3(0, 0, initialWheelZRot + (currentTouchYPos - initialTouchYPos));
+            wheel.eulerAngles = new Vector3(0, 0, initialWheelZRot - (currentTouchYPos - initialTouchYPos));
             target.eulerAngles = wheel.eulerAngles;
         }
     }

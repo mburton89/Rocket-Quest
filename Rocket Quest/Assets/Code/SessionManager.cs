@@ -10,6 +10,7 @@ public class SessionManager : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
         Instance = this;
     }
 
