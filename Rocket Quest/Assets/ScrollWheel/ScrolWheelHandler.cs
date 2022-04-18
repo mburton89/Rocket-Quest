@@ -14,10 +14,14 @@ public class ScrolWheelHandler : MonoBehaviour, IPointerDownHandler, IPointerUpH
     [SerializeField] Transform wheel;
     [SerializeField] Transform target;
 
+    PointerEventData eventData1;
+
     public void OnPointerDown(PointerEventData eventData)
     {
         canScroll = true;
-        initialTouchYPos = Input.mousePosition.y;
+        initialTouchYPos = eventData.position.y;
+        print(eventData.position.y);
+        eventData1 = eventData;
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -30,7 +34,8 @@ public class ScrolWheelHandler : MonoBehaviour, IPointerDownHandler, IPointerUpH
     {
         if (canScroll)
         {
-            currentTouchYPos = Input.mousePosition.y;
+            print(eventData1.position);
+            currentTouchYPos = eventData1.position.y;
             wheel.eulerAngles = new Vector3(0, 0, initialWheelZRot - (currentTouchYPos - initialTouchYPos));
             target.eulerAngles = wheel.eulerAngles;
         }
